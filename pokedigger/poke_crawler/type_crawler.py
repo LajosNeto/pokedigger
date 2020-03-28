@@ -43,4 +43,4 @@ class TypeCrawler(BaseCrawler):
             if span:
                 type_text = span.text
                 type_color = cssutils.parseStyle(td['style'])['background']
-                self.update_data([type_text, type_color])
+                self.update_data([[type_text, type_color]])

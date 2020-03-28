@@ -22,9 +22,9 @@ class BaseCrawler(ABC):
         pass
     
     def save(self):
-        self.data.to_json(self.output_file, orient='records')
+        self.data.to_json(self.output_file, orient='records', force_ascii=False)
 
-    def update_data(self, data_values):
-        new_entry = dict(zip(self.data_columns, data_values))
-        self.data = self.data.append(new_entry, ignore_index=True)
+    def update_data(self, data_values, multi_column=True):
+        new_entry = pd.DataFrame(columns=self.data_columns, data=data_values)
+        self.data = self.data.append(new_entry)
     
