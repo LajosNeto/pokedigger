@@ -94,6 +94,16 @@ class PokemonCrawler(BaseCrawler):
                 html += str(tag) 
         self.stats_soup = bs.BeautifulSoup(html, 'html.parser')
     
+    def __get_type_effect_soup(self, soup):
+        html = u""
+        type_effect_tag = soup.find(id="Type_effectiveness").parent
+        for tag in type_effect_tag.next_siblings: 
+            if tag.name == "h3": 
+                break
+            else: 
+                html += str(tag) 
+        self.type_effect_soup = bs.BeautifulSoup(html, 'html.parser')
+    
     def __get_base_stats(self):
         base_stats_table = self.stats_soup.find('table')
         table_stats_trs = base_stats_table.find_all('tr')
