@@ -6,16 +6,20 @@ Pokemon crawler
 # Lajos Neto <lajosneto@gmail.com>
 
 
+import re
 import pandas as pd
 import logging
 import requests
 import bs4 as bs
 from .base import BaseCrawler
+from .utils.string_utils import vulgar_fraction_translator
 import cssutils
 cssutils.log.setLevel(logging.CRITICAL)
 
 
-URL = 'https://bulbapedia.bulbagarden.net/wiki/Meowth_(Pok%C3%A9mon)'
+# TEST : https://bulbapedia.bulbagarden.net/wiki/Corviknight_(Pok%C3%A9mon)
+
+URL = 'https://bulbapedia.bulbagarden.net/wiki/Mewtwo_(Pok%C3%A9mon)'
 DATA_COLUMNS = ['number',
                 'name',
                 'japanese_name',
@@ -63,10 +67,13 @@ class PokemonCrawler(BaseCrawler):
         main_soup = bs.BeautifulSoup(page.content, 'html.parser')
         self.__check_variants(main_soup)
         self.__get_stats_soup(main_soup)
+        self.__get_type_effect_soup(main_soup)
         self.__get_base_stats()
+        self.__get_base_type_effect()
         print(self.variants)
         for variant in self.variants:
-            print(self.__get_variant_stats(variant))
+            print(self.__get_variant_type_effect(variant))
+        # print(self.base_damage_normal, self.base_damage_weak, self.base_damage_immune, self.base_damage_resistant)
 
     def __check_variants(self, soup):
         # TO DO -> GET VARIANT IMAGES
@@ -136,3 +143,94 @@ class PokemonCrawler(BaseCrawler):
             self.base_variant_hp, self.base_variant_attack, self.base_variant_defense, 
             self.base_variant_sp_attack, self.base_variant_sp_deffense, self.base_variant_speed, 
             self.base_variant_total))
+    
+    def __get_base_type_effect(self):
+        """Retrieves pokemon base variant type effect data.
+
+        Gets the first <table> from the type variant soup.
+        Within the next step, all inner tables are retrieved :
+        <table> 1 -> damage normal types
+        <table> 21 -> damage weak types
+        <table> 41 -> damage immune types
+        <table> 61 -> damage resistant types
+        The <span> tag is only used it it's style is "display:inline-block;", otherwise, it means that the current type
+        is not used/displayed.
+
+        Parameters
+        ----------
+        variant : str
+            Pokemon variant name whose type effect data is currently being fetched
+        """
+        base_type_effect_table = self.type_effect_soup.find('table').find_all('table')
+        for effect_span in base_type_effect_table[1].find_all('span',{'style': "display:inline-block;"}):
+            a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+            if(len(a) == 2):
+                self.base_damage_normal.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+        for effect_span in base_type_effect_table[21].find_all('span',{'style': "display:inline-block;"}):
+            a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+            if(len(a) == 2):
+                self.base_damage_weak.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+        for effect_span in base_type_effect_table[41].find_all('span',{'style': "display:inline-block;"}):
+            a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+            if(len(a) == 2):
+                self.base_damage_immune.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+        for effect_span in base_type_effect_table[61].find_all('span',{'style': "display:inline-block;"}):
+            a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+            if(len(a) == 2):
+                self.base_damage_resistant.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+    
+    def __get_variant_type_effect(self, variant):
+        """Retrieves pokemon variant type effect data.
+
+        The first step is done to retrieve all <h4> and <h5> tags from the type effect soup.
+        All type effect <table> are preceded by a <h4> or <h5> tag with the pokemon variant string.
+        We take the next table below the found header tag, this is the type effect section/table for the provided variant.
+        
+        The type effect table for specified variant is composed by several inner <table> tags containing several <span> tags where 
+        the type effect multiplier data is stored.
+        <table> 3 -> damage normal types
+        <table> 5 -> damage weak types
+        <table> 7 -> damage immune types
+        <table> 9 -> damage resistant types
+        The <span> tag from each inner <table> is only used it it's style is "display:inline-block;", otherwise, it means that the 
+        current type is not used/displayed.
+
+        If no <h4> or <h5> tag with the variant string is found, the base variant data is returned.
+
+        Parameters
+        ----------
+        variant : str
+            Pokemon variant name whose type effect data is currently being fetched
+        """
+        header_tags = self.type_effect_soup.find_all(['h4', 'h5'])
+        variant_header_tag = None
+        for tag in header_tags:
+            if tag.text == variant:
+                variant_header_tag = tag
+        if(variant_header_tag):
+            damage_normal_data = []
+            damage_weak_data = []
+            damage_immune_data = []
+            damage_resistant_data = []
+            variant_type_effect_table = variant_header_tag.next_sibling.next_sibling
+            inner_tables = [child for child in variant_type_effect_table.children]
+            for effect_span in inner_tables[3].find_all('span',{'style': "display:inline-block;"}):
+                a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+                if(len(a) == 2):
+                    damage_normal_data.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+            for effect_span in inner_tables[5].find_all('span',{'style': "display:inline-block;"}):
+                a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+                if(len(a) == 2):
+                    damage_weak_data.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+            for effect_span in inner_tables[7].find_all('span',{'style': "display:inline-block;"}):
+                a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+                if(len(a) == 2):
+                    damage_immune_data.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+            for effect_span in inner_tables[9].find_all('span',{'style': "display:inline-block;"}):
+                a = re.findall('\n+(.*?)\n', effect_span.text.replace('×',''), flags=re.IGNORECASE)
+                if(len(a) == 2):
+                    damage_resistant_data.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
+            return (damage_normal_data, damage_weak_data, damage_immune_data, damage_resistant_data)
+        return (self.base_damage_normal, self.base_damage_weak, self.base_damage_immune, self.base_damage_resistant)
+            
+
