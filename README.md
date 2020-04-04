@@ -36,3 +36,9 @@ Some pokemons details pages do not follow the overall pattern from the majority 
 There are some known pages with this kind of issue that the Pokemon Crawler currently does not work on :(.
 From all 894 pokemons, 10 are currently not being fetched, for more details, you can check the error output
 file at : pokedigger/pokedigger/poke_crawler/output/reports/error_pokemons.json
+
+<br>
+<br>
+<br>
+
+image source : https://pokemonrevolution.net/forum/index.php?threads/hoenn-excavation-sites-guide.113459/
