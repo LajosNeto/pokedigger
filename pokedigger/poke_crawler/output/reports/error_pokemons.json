@@ -1,0 +1,66 @@
+[
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Alakazam_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nIndexError: list index out of range\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Farfetch%27d_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nIndexError: list index out of range\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Pichu_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 174, in __get_variant_stats\n    table_stats_trs = variant_stats_table.find_all('tr')\nAttributeError: 'NoneType' object has no attribute 'find_all'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Corsola_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nIndexError: list index out of range\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Deoxys_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nAttributeError: 'NoneType' object has no attribute 'find'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Burmy_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nAttributeError: 'NoneType' object has no attribute 'find'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Wormadam_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nAttributeError: 'NoneType' object has no attribute 'find'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Rotom_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nAttributeError: 'NoneType' object has no attribute 'find'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Giratina_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nAttributeError: 'NoneType' object has no attribute 'find'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Shaymin_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 90, in __run_crawl\n    hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 175, in __get_variant_stats\n    hp = table_stats_trs[2].th.find('div',{'style': \"float:right\"}).text\nAttributeError: 'NoneType' object has no attribute 'find'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Volcanion_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 83, in __run_crawl\n    self.__get_stats_soup(main_soup)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 131, in __get_stats_soup\n    stat_tag = soup.find(id='Stats').parent\nAttributeError: 'NoneType' object has no attribute 'parent'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Magearna_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 83, in __run_crawl\n    self.__get_stats_soup(main_soup)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 131, in __get_stats_soup\n    stat_tag = soup.find(id='Stats').parent\nAttributeError: 'NoneType' object has no attribute 'parent'\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Kubfu_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 82, in __run_crawl\n    self.__check_variants(main_soup)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 121, in __check_variants\n    if not self.__check_empty_tag(trs[1]):\nIndexError: list index out of range\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Urshifu_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 82, in __run_crawl\n    self.__check_variants(main_soup)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 121, in __check_variants\n    if not self.__check_empty_tag(trs[1]):\nIndexError: list index out of range\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Calyrex_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 82, in __run_crawl\n    self.__check_variants(main_soup)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 121, in __check_variants\n    if not self.__check_empty_tag(trs[1]):\nIndexError: list index out of range\n"
+    },
+    {
+        "url": "https:\/\/bulbapedia.bulbagarden.net\/wiki\/Zarude_(Pok%C3%A9mon)",
+        "tracebak": "Traceback (most recent call last):\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 68, in run\n    self.__run_crawl(url)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 82, in __run_crawl\n    self.__check_variants(main_soup)\n  File \"\/Users\/lajosneto\/Developer\/projects\/pokedigger\/pokedigger\/poke_crawler\/pokemon_crawler.py\", line 121, in __check_variants\n    if not self.__check_empty_tag(trs[1]):\nIndexError: list index out of range\n"
+    }
+]
