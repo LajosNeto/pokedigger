@@ -6,6 +6,7 @@ Pokemon crawler
 # Lajos Neto <lajosneto@gmail.com>
 
 
+import traceback
 import re
 import pandas as pd
 import logging
@@ -13,40 +14,36 @@ import requests
 import bs4 as bs
 from .base import BaseCrawler
 from .utils.string_utils import vulgar_fraction_translator
+from .pokemon_list_crawler import PokemonListCrawler
 import cssutils
 cssutils.log.setLevel(logging.CRITICAL)
 
 
-# TEST : https://bulbapedia.bulbagarden.net/wiki/Corviknight_(Pok%C3%A9mon)
+# # TEST : https://bulbapedia.bulbagarden.net/wiki/Corviknight_(Pok%C3%A9mon)
 
-URL = 'https://bulbapedia.bulbagarden.net/wiki/Mewtwo_(Pok%C3%A9mon)'
-DATA_COLUMNS = ['number',
-                'name',
-                'japanese_name',
+# URL = 'https://bulbapedia.bulbagarden.net/wiki/Pumpkaboo_(Pok%C3%A9mon)'
+DATA_COLUMNS = ['name',
                 'variant',
-                'generation',
-                'type',
-                'category',
-                'catch_rate',
-                'hatch_time',
-                'height',
-                'weight',
-                'leveling_rate',
                 'base_hp',
                 'base_attack',
                 'base_defense',
                 'base_sp_attack',
                 'base_sp_defense',
                 'base_speed',
-                'base_total']
-
+                'base_total',
+                'type_damage_normal',
+                'type_damage_weak',
+                'type_damage_immune',
+                'type_damage_resistant']
 OUTPUT_FILE = 'pokemons.json'
+# ERROR_OUTPUT_FILE = 'poke_crawler/output/reports/error_pokemons.json'
 
 
 class PokemonCrawler(BaseCrawler):
 
-    def __init__(self):
+    def __init__(self, pokemon_urls):
         super().__init__(DATA_COLUMNS, OUTPUT_FILE)
+        self.pokemon_urls = pokemon_urls
         self.variants = []
         self.stats_soup = None
         self.type_effect_soup = None
@@ -61,19 +58,52 @@ class PokemonCrawler(BaseCrawler):
         self.base_damage_weak = []
         self.base_damage_immune = []
         self.base_damage_resistant = []
+        self.base_types = []
     
     def run(self):
-        page = requests.get(URL)
+        for url in self.pokemon_urls:
+            print("Fetching : ",url)
+            self.__reset_attributes()
+            try:
+                self.__run_crawl(url)
+            except Exception as e:
+                self.hanlde_error(url, traceback.format_exc())
+                continue
+        self.save()
+    
+    def __run_crawl(self, pokemon_url):
+        page = requests.get(pokemon_url)
         main_soup = bs.BeautifulSoup(page.content, 'html.parser')
         self.__check_variants(main_soup)
         self.__get_stats_soup(main_soup)
         self.__get_type_effect_soup(main_soup)
         self.__get_base_stats()
         self.__get_base_type_effect()
-        print(self.variants)
-        for variant in self.variants:
-            print(self.__get_variant_type_effect(variant))
-        # print(self.base_damage_normal, self.base_damage_weak, self.base_damage_immune, self.base_damage_resistant)
+        for order,variant in enumerate(self.variants):
+            name = variant
+            is_variant = 1 if order != 0 else 0
+            hp, attack, defense, sp_attack, sp_defense, speed, total = self.__get_variant_stats(variant)
+            damage_normal, damage_weak, damage_immune, damage_resistant = self.__get_variant_type_effect(variant)
+            self.update_data([
+                [name, is_variant, hp, attack, defense, sp_attack, sp_defense, 
+                speed, total, damage_normal, damage_weak, damage_immune, damage_resistant]])
+    
+    def __reset_attributes(self):
+        """Resets class attributes to store next fetched pokemon data."""
+        self.variants = []
+        self.stats_soup = None
+        self.type_effect_soup = None
+        self.base_variant_hp = None
+        self.base_variant_attack = None
+        self.base_variant_defense = None
+        self.base_variant_sp_attack = None
+        self.base_variant_sp_deffense = None
+        self.base_variant_speed = None
+        self.base_variant_total = None
+        self.base_damage_normal = []
+        self.base_damage_weak = []
+        self.base_damage_immune = []
+        self.base_damage_resistant = []
 
     def __check_variants(self, soup):
         # TO DO -> GET VARIANT IMAGES
@@ -111,6 +141,7 @@ class PokemonCrawler(BaseCrawler):
                 html += str(tag) 
         self.type_effect_soup = bs.BeautifulSoup(html, 'html.parser')
     
+    
     def __get_base_stats(self):
         base_stats_table = self.stats_soup.find('table')
         table_stats_trs = base_stats_table.find_all('tr')
@@ -138,11 +169,11 @@ class PokemonCrawler(BaseCrawler):
             sp_defense = table_stats_trs[6].th.find('div',{'style': "float:right"}).text
             speed = table_stats_trs[7].th.find('div',{'style': "float:right"}).text
             total = table_stats_trs[8].th.find('div',{'style': "float:right"}).text
-            return(variant, (hp, attack, defense, sp_attack, sp_defense, speed, total))
-        return (variant,(
+            return (hp, attack, defense, sp_attack, sp_defense, speed, total)
+        return (
             self.base_variant_hp, self.base_variant_attack, self.base_variant_defense, 
             self.base_variant_sp_attack, self.base_variant_sp_deffense, self.base_variant_speed, 
-            self.base_variant_total))
+            self.base_variant_total)
     
     def __get_base_type_effect(self):
         """Retrieves pokemon base variant type effect data.
