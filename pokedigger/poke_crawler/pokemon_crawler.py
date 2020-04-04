@@ -19,9 +19,6 @@ import cssutils
 cssutils.log.setLevel(logging.CRITICAL)
 
 
-# # TEST : https://bulbapedia.bulbagarden.net/wiki/Corviknight_(Pok%C3%A9mon)
-
-# URL = 'https://bulbapedia.bulbagarden.net/wiki/Pumpkaboo_(Pok%C3%A9mon)'
 DATA_COLUMNS = ['name',
                 'variant',
                 'base_hp',
@@ -36,7 +33,6 @@ DATA_COLUMNS = ['name',
                 'type_damage_immune',
                 'type_damage_resistant']
 OUTPUT_FILE = 'pokemons.json'
-# ERROR_OUTPUT_FILE = 'poke_crawler/output/reports/error_pokemons.json'
 
 
 class PokemonCrawler(BaseCrawler):
@@ -62,7 +58,6 @@ class PokemonCrawler(BaseCrawler):
     
     def run(self):
         for url in self.pokemon_urls:
-            print("Fetching : ",url)
             self.__reset_attributes()
             try:
                 self.__run_crawl(url)
@@ -140,7 +135,6 @@ class PokemonCrawler(BaseCrawler):
             else: 
                 html += str(tag) 
         self.type_effect_soup = bs.BeautifulSoup(html, 'html.parser')
-    
     
     def __get_base_stats(self):
         base_stats_table = self.stats_soup.find('table')
@@ -263,5 +257,3 @@ class PokemonCrawler(BaseCrawler):
                     damage_resistant_data.append(a[0].strip()+'_'+vulgar_fraction_translator(a[1].strip()))
             return (damage_normal_data, damage_weak_data, damage_immune_data, damage_resistant_data)
         return (self.base_damage_normal, self.base_damage_weak, self.base_damage_immune, self.base_damage_resistant)
-            
-
