@@ -36,7 +36,7 @@ class PokemonListCrawler(BaseCrawler):
         if self.save_output: 
             self.save()
         else:
-            return self.data
+            return self.data['url'].tolist()
     
     def __get_pokemons_url(self, soup):
         """Retrieves pokemon urls
